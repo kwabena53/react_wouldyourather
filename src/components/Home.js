@@ -1,10 +1,13 @@
 import React from "react"
-import Menu from "./Menu"
-
+// import Menu from "./Menu"
+import LoginPage from "./LoginPage"
 
 const Home = () =>{
     return(
-        <Menu/>
+        <div>
+            <LoginPage/>
+        </div>
+        
     )
 }
 

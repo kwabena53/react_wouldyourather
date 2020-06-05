@@ -4,8 +4,13 @@ import { connect } from 'react-redux'
 
 
 
-const Menu =({authedUser, nameOfUser}) =>{
+const Menu =({authedUser, user}) =>{
 
+    // I don't understand why user renders undefined at first
+    let name = null
+    if(user !== undefined){
+         name = user.name
+    }
     return(
         <Nav
             className="justify-content-center"
@@ -21,11 +26,11 @@ const Menu =({authedUser, nameOfUser}) =>{
                 <Nav.Link eventKey="link-2">Leaderboard</Nav.Link>
             </Nav.Item>
             
-            {authedUser  &(
-                <Fragment className="justify-content-end">
+            {authedUser  &&(
+                <Fragment>
                     <Nav.Item>
                 <Nav.Link eventKey="disabled" disabled>
-                  Hello {nameOfUser}
+                  Hello {name}
                 </Nav.Link>
 
                 </Nav.Item>
@@ -39,11 +44,11 @@ const Menu =({authedUser, nameOfUser}) =>{
 }
 
 const mapStateToProps = ({authedUser, users}) =>{
-    const nameOfUser = users[authedUser]
-    console.log("spy",nameOfUser)
+    const user = users[authedUser]
+    console.log("spy",user)
     return {
         authedUser : authedUser ? authedUser: false,
-        nameOfUser
+        user
     }
 }
 
