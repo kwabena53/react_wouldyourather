@@ -1,16 +1,21 @@
 import React, {Fragment} from "react"
 import Nav from 'react-bootstrap/Nav'
 import { connect } from 'react-redux'
+import { logOutUser } from '../actions/authedUser'
 
 
-
-const Menu =({authedUser, user}) =>{
+const Menu =({authedUser, user, dispatch}) =>{
 
     // I don't understand why user renders undefined at first
     let name = null
     if(user !== undefined){
          name = user.name
     }
+
+    const handleLogout = () => {
+        dispatch(logOutUser())
+    }
+
     return(
         <Nav
             className="justify-content-center"
@@ -34,7 +39,7 @@ const Menu =({authedUser, user}) =>{
                 </Nav.Link>
 
                 </Nav.Item>
-                <Nav.Item>
+                <Nav.Item onClick={handleLogout}>
                     <Nav.Link eventKey="link-2">Logout</Nav.Link>
                 </Nav.Item>
                 </Fragment>

@@ -3,17 +3,19 @@ import UsersDropdown from "./UsersDropdown"
 import Button from 'react-bootstrap/Button'
 import { setAuthedUser } from '../actions/authedUser'
 import {connect} from "react-redux"
+import { Link } from 'react-router-dom'
 
 
-const SigninForm = () => {
+
+const SigninForm = ({dispatch}) => {
 
     const [userData, setUserData] = useState("");
 
     const handleSignin = (e) => {
-        
+
         e.preventDefault()
 
-        const { dispatch} = this.props
+        // const { dispatch} = this.props
 
         dispatch(setAuthedUser(userData))
 
@@ -24,9 +26,13 @@ const SigninForm = () => {
     return(
         <>
             <UsersDropdown setUserData = {setUserData}/>
-            <Button variant="secondary" size="lg" onClick={handleSignin} block>
-                SIGN IN
-            </Button>
+
+            <Link to="/">
+                <Button variant="secondary" size="lg" onClick={handleSignin} block>
+                    SIGN IN
+                </Button>
+            </Link>
+            
         </>
     )
 }
