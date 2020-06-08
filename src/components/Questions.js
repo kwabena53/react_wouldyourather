@@ -4,7 +4,7 @@ import QuestionCard from "./QuestionCard"
 import { formatQuestionData } from '../utils/helpers'
 
 const Questions = ({ filteredQuestion, users, questions}) => {
-
+        // console.log("Comman see: ", filteredQuestion)
         return(
             
             filteredQuestion.map((question)=> {
@@ -19,7 +19,7 @@ function mapStateToProps({questions, users}, {search}) {
     return{
         filteredQuestion: questions !== undefined 
         ? Object.keys(questions).filter((question) =>{ //filtering to get only the answered questions
-            console.log(questions[question].optionOne.votes, questions[question].optionTwo.votes )
+            // console.log(questions[question].optionOne.votes, questions[question].optionTwo.votes )
             return search(questions, question) //callback function to search for answered/ unanswered questions
             // questions[question] give you the question object
           })

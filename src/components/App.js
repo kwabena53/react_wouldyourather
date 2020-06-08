@@ -18,16 +18,20 @@ class App extends Component{
   }
 
   render(){
+    
     const {authedUser} = this.props
+    console.log("This is the authedUser: ",authedUser)
     return (
       <Router>
         <div className="App">
           {
+            
             authedUser
             ?
             <div>
             <Route path='/' exact component={Home} />
-            <Route path='/question:id' component={QuestionPage}/>
+            <Route path='/question/:id' component={QuestionPage}/>
+            <Route path='/newquestion' component={NewQuestion}/> 
             </div>
             :
               <LoginPage/>

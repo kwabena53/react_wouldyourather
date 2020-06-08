@@ -12,7 +12,7 @@ import {connect} from "react-redux"
 
 const Home = () =>{
 
-    const [isAnsweredQuestion, setToAnsweredQuestion] = useState({left:{clicked: true}, right:{clicked: false}});
+    const [isAnsweredQuestion, setToAnsweredQuestion] = useState({left:{clicked: false}, right:{clicked: true}});
     
    const  handleOnclickAnswered = () => {
         setToAnsweredQuestion({
@@ -29,11 +29,13 @@ const Home = () =>{
     }
 
     const filterAnswered = (questions, question) => {
+        console.log("Shyde: ", questions[question].optionOne.votes, questions[question].optionTwo.votes)
+        console.log("Socket " , questions[question].optionOne.votes !== [], questions[question].optionTwo.votes !== [] )
         return questions[question].optionOne.votes !== [] && questions[question].optionTwo.votes !== [] 
     }
 
     const filterUnanswered = (questions, question) => {
-        return questions[question].optionOne.votes === [] && questions[question].optionTwo.votes === [] 
+        return questions[question].optionOne.votes === null && questions[question].optionTwo.votes === null
     }
     return(
         <div>
@@ -47,12 +49,13 @@ const Home = () =>{
                     <Card border="secondary" style={{ width: '30rem'}}>
                     <Card.Body>
                         <Nav justify variant="pills" defaultActiveKey="#">
-                            <Nav.Item onClick={handleOnclickAnswered}>
-                                <Nav.Link href="#">Answered Questions</Nav.Link>
-                            </Nav.Item>
                             <Nav.Item onClick={handleOnclickUnanswered}>
-                                <Nav.Link eventKey="link-1">Unanswered Questions</Nav.Link>
+                                <Nav.Link href="#" >Unanswered Questions</Nav.Link>
                             </Nav.Item>
+                            <Nav.Item onClick={handleOnclickAnswered}>
+                                <Nav.Link eventKey="link-1">Answered Questions</Nav.Link>
+                            </Nav.Item>
+                           
                         </Nav>
 
                         {/* displays Answered Questions */}

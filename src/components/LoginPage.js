@@ -11,7 +11,7 @@ const LoginPage = () => {
 
     return(
         <>
-        <Menu/> <br/>
+        <Menu activeKey="/"/> <br/>
         <Container>
             <Row>
                 <Col xl="12" sm="12" md="12" className="d-flex justify-content-center">

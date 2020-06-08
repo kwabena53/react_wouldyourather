@@ -2,9 +2,9 @@ import React, {Fragment} from "react"
 import Nav from 'react-bootstrap/Nav'
 import { connect } from 'react-redux'
 import { logOutUser } from '../actions/authedUser'
+import { NavLink,Link } from 'react-router-dom'
 
-
-const Menu =({authedUser, user, dispatch}) =>{
+const Menu =({authedUser, user, dispatch, activeKey}) =>{
 
     // I don't understand why user renders undefined at first
     let name = null
@@ -19,16 +19,15 @@ const Menu =({authedUser, user, dispatch}) =>{
     return(
         <Nav
             className="justify-content-center"
-            activeKey="/home"
             >
             <Nav.Item>
-                <Nav.Link href="/home">Home</Nav.Link>
+                <Nav.Link as={Link} to="/">Home</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link eventKey="link-1">New Question</Nav.Link>
+                <Nav.Link as={Link} to="/newquestion">New Question</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link eventKey="link-2">Leaderboard</Nav.Link>
+                <Nav.Link >Leaderboard</Nav.Link>
             </Nav.Item>
             
             {authedUser  &&(

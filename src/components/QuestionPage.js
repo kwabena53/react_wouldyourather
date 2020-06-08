@@ -8,15 +8,17 @@ import Form from 'react-bootstrap/Form'
 import Menu from './Menu'
 import Container from 'react-bootstrap/Container'
 import {connect} from "react-redux"
+import {withRouter} from "react-router-dom"
 
 
 
 
-const Radio = ({text}) => {
+const Radio = ({text, name}) => {
     return(
         <Form.Check 
             type='radio'
             id="default-radio"
+            name={name}
             label={text}
         />
     )
@@ -27,7 +29,7 @@ const QuestionPage = ({question, user}) => {
     const {avatarURL, name} = user
     return(
         <>
-        <Menu/> <br/>
+        <Menu activeKey="/"/> <br/>
         <Container>
             <Row>
                 <Col xl="12" sm="12" md="12" className="d-flex justify-content-center">
@@ -37,13 +39,14 @@ const QuestionPage = ({question, user}) => {
                         {/* <Card.Title>Sign In</Card.Title> */}
                         <Row>
                             <Col sm={12} lg={3} md={6}>
-                                <Image src={avatarURL} className="fit-image" roundedCircle />
+                                <Image src={`/${avatarURL}`} className="fit-image" roundedCircle />
                             </Col>
                             <Col sm={12} lg={9} md={6}>
                                 <h5>Would you rather</h5>
-                                <Radio text={optionOne.text}/>
-                                <Radio text={optionTwo.text}/>
-                                          
+                                <div key="default-radio" className="mb-3 right">
+                                    <Radio text={optionOne.text} name="question"/>
+                                    <Radio text={optionTwo.text} name="question"/>
+                                </div>                                          
                                 <Button variant="outline-secondary" size="sm" block>
                                     Submit
                                 </Button>
@@ -60,9 +63,12 @@ const QuestionPage = ({question, user}) => {
   
 }
 
-function mapStateToProps ({questions}, { id }) {
+function mapStateToProps ({questions, users},  props ) {
+    const { id } = props.match.params
+    
   const question = questions[id]
-  const user = question.author
+  const user = users[question.author]
+  console.log(user.avatarURL)
   
     return {
       question,
@@ -70,4 +76,4 @@ function mapStateToProps ({questions}, { id }) {
     }
   }
   
-  export default connect(mapStateToProps)(QuestionPage)
+  export default withRouter(connect(mapStateToProps)(QuestionPage))

@@ -113,6 +113,19 @@ let users = {
         text: 'write Swift'
       }
     },
+    "tj352vrefupe1dqz9erx13r": {
+      id: 'tj352vrefupe1dqz9erx13r',
+      author: 'sarahedo',
+      timestamp: 1493579767190,
+      optionOne: {
+        votes: [],
+        text: 'write JavaScript',
+      },
+      optionTwo: {
+        votes: [],
+        text: 'write Swift'
+      }
+    },
   }
   
   function generateUID () {
@@ -131,7 +144,7 @@ let users = {
     })
   }
   
-  function formatQuestion ({ optionOneText, optionTwoText, author }) {
+   function formatQuestion ({ optionOneText, optionTwoText, author }) {
     return {
       id: generateUID(),
       timestamp: Date.now(),
@@ -150,11 +163,13 @@ let users = {
   export function _saveQuestion (question) {
     return new Promise((res, rej) => {
       const authedUser = question.author;
+      console.log("hammer ", question)
       const formattedQuestion = formatQuestion(question)
   
       setTimeout(() => {
         questions = {
           ...questions,
+          // [question.id]: question
           [formattedQuestion.id]: formattedQuestion
         }
         
@@ -167,6 +182,7 @@ let users = {
         }
   
         res(formattedQuestion)
+        // res(question)
       }, 1000)
     })
   }
