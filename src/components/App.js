@@ -9,6 +9,7 @@ import QuestionPage from "./QuestionPage"
 import LeaderboardPage from "./LeaderboardPage"
 import NewQuestion from "./NewQuestion"
 import LoginPage from "./LoginPage"
+import ResultPage from "./ResultPage"
 
 
 
@@ -32,6 +33,7 @@ class App extends Component{
             <Route path='/' exact component={Home} />
             <Route path='/question/:id' component={QuestionPage}/>
             <Route path='/newquestion' component={NewQuestion}/> 
+            <Route path='/result/:id' component={ResultPage}/> 
             </div>
             :
               <LoginPage/>

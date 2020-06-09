@@ -22,11 +22,25 @@ const QuestionCard = ({data}) => {
                     <Col sm={12} lg={9} md={6}>
                         <h5>Would you rather</h5>
                         <p>{data.text}</p>
-                        <Link to={`/question/${data.id}`} >
-                            <Button variant="outline-secondary" size="sm" block>
-                                View Poll
-                            </Button>
-                        </Link>
+
+                        {/* show view poll button if question has been answered */}
+                        {data.type === "answered" &&(
+                            <Link to={`/result/${data.id}`} >
+                                <Button variant="outline-secondary" size="sm" block>
+                                    View Poll
+                                </Button>
+                            </Link>
+                        )}
+                        {/* show vote button if question hasn't been answered */}
+                        {data.type === "unanswered" &&(
+                            <Link to={`/question/${data.id}`} >
+                                <Button variant="outline-secondary" size="sm" block>
+                                    Vote
+                                </Button>
+                            </Link>
+                        )}
+
+                        
                         
                     </Col>
                 </Row>

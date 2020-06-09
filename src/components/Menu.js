@@ -2,7 +2,7 @@ import React, {Fragment} from "react"
 import Nav from 'react-bootstrap/Nav'
 import { connect } from 'react-redux'
 import { logOutUser } from '../actions/authedUser'
-import { NavLink,Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Menu =({authedUser, user, dispatch, activeKey}) =>{
 

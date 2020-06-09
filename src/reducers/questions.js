@@ -1,5 +1,6 @@
 import { RECEIVE_QUESTIONS } from '../actions/questions'
 import { ADD_QUESTION } from '../actions/questions'
+// import { ADD_QUESTION_ANSWER } from '../actions/questions'
 
 
 
@@ -17,6 +18,10 @@ export default function questions (state = {}, action) {
         ...state,
         [action.question.id] : action.question
       }
+    // case ADD_QUESTION_ANSWER: 
+    //   return {
+
+    //   }
     default :
       return state
   }

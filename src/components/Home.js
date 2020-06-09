@@ -4,7 +4,6 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Nav from 'react-bootstrap/Nav'
-import Button from 'react-bootstrap/Button'
 import Menu from './Menu'
 import Questions from "./Questions"
 import {connect} from "react-redux"
@@ -29,13 +28,14 @@ const Home = () =>{
     }
 
     const filterAnswered = (questions, question) => {
-        console.log("Shyde: ", questions[question].optionOne.votes, questions[question].optionTwo.votes)
+        // console.log("Shyde: ", questions[question].optionOne.votes, questions[question].optionTwo.votes)
         console.log("Socket " , questions[question].optionOne.votes !== [], questions[question].optionTwo.votes !== [] )
-        return questions[question].optionOne.votes !== [] && questions[question].optionTwo.votes !== [] 
+        return questions[question].optionOne.votes.length !== 0 || questions[question].optionTwo.length !== 0 
     }
 
     const filterUnanswered = (questions, question) => {
-        return questions[question].optionOne.votes === null && questions[question].optionTwo.votes === null
+        // console.log("look: ", Object.entries(question))
+        return questions[question].optionOne.votes.length === 0 && questions[question].optionTwo.votes.length === 0
     }
     return(
         <div>
@@ -60,12 +60,12 @@ const Home = () =>{
 
                         {/* displays Answered Questions */}
                         {isAnsweredQuestion.left.clicked &&(
-                            <Questions search = {filterAnswered} />
+                            <Questions search = {filterAnswered} type = "answered"/>
                         )}
 
                         {/* displays Unanswered Questions */}
                         {isAnsweredQuestion.right.clicked &&(
-                            <Questions search = {filterUnanswered} />
+                            <Questions search = {filterUnanswered} type = "unanswered" />
                         )}
 
                     </Card.Body>
