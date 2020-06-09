@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
@@ -9,24 +9,49 @@ import Menu from './Menu'
 import Container from 'react-bootstrap/Container'
 import {connect} from "react-redux"
 import {withRouter} from "react-router-dom"
+import {handleAddQuestionAnswer} from "../actions/questions"
 
 
 
 
-const Radio = ({text, name}) => {
+const Radio = ({text, name, handleClick}) => {
     return(
         <Form.Check 
             type='radio'
             id="default-radio"
             name={name}
             label={text}
+            onClick = {handleClick}
         />
     )
 }
 
-const QuestionPage = ({question, user}) => {
+const QuestionPage = ({question, user, dispatch, history}) => {
     const {optionOne, optionTwo} = question
     const {avatarURL, name} = user
+    const [answer, setQuestionAnswer] = useState("")
+
+    const handleOptionClick = (e) => {
+        const target = e.target
+        const name = target.name
+        setQuestionAnswer({
+             ...answer,
+             [name] : target.value
+         })
+         console.log(answer)
+    }
+
+    const handleVote = (e) => {
+        e.preventDefault()
+        dispatch(handleAddQuestionAnswer(
+            user, 
+            question.id, 
+            answer
+        ))
+        history.push('/')
+        // console.log("This was submitted: ", questionData)
+    }
+
     return(
         <>
         <Menu activeKey="/"/> <br/>
@@ -44,10 +69,10 @@ const QuestionPage = ({question, user}) => {
                             <Col sm={12} lg={9} md={6}>
                                 <h5>Would you rather</h5>
                                 <div key="default-radio" className="mb-3 right">
-                                    <Radio text={optionOne.text} name="question"/>
-                                    <Radio text={optionTwo.text} name="question"/>
+                                    <Radio name="optionOne" handleClick={handleOptionClick} text={optionOne.text}/>
+                                    <Radio name="optionTwo" handleClick={handleOptionClick} text={optionTwo.text}/>
                                 </div>                                          
-                                <Button variant="outline-secondary" size="sm" block>
+                                <Button  onClick={handleVote} variant="outline-secondary" size="sm" block>
                                     Submit
                                 </Button>
                             </Col>
@@ -72,7 +97,7 @@ function mapStateToProps ({questions, users},  props ) {
   
     return {
       question,
-      user
+      user,
     }
   }
   

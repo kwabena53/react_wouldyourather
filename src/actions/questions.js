@@ -1,4 +1,4 @@
-import {saveQuestion} from  "../utils/api"
+import {saveQuestion, saveQuestionAnswer} from  "../utils/api"
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
 export const ADD_QUESTION_ANSWER = 'ADD_QUESTION_ANSWER'
@@ -34,6 +34,24 @@ export function handleAddQuestion(optionOneText, optionTwoText, authedUser){
   }
 }
 
+export function handleAddQuestionAnswer(authedUser, qid, answer ){
+
+  return (dispatch) => {
+ 
+    console.log("gyae saas: ",  authedUser)
+    return saveQuestionAnswer({
+      authedUser: authedUser,
+      qid: qid,
+      answer: answer
+    })
+    .then((questionAnswer)=> {
+      console.log("Chale work o: ", questionAnswer)
+      dispatch(addQuestionAnswer(questionAnswer))
+    })
+  }
+}
+
+
 export function addQuestion (question) {
   return {
     type: ADD_QUESTION,
@@ -41,9 +59,11 @@ export function addQuestion (question) {
   }
 }
 
-export function addQuestionAnswer (id) {
+export function addQuestionAnswer (authedUser, qid, answer ) {
   return {
     type: ADD_QUESTION,
-    id: id,
+    qid: qid,
+    authedUser: authedUser,
+    answer: answer
   }
 }

@@ -25,6 +25,8 @@ const ResultPage = ({question, user}) => {
     const optionTwoText = optionTwo.text
 
     const {avatarURL, name} = user
+    
+    
     return(
         <>
         <Menu activeKey="/"/> <br/>
