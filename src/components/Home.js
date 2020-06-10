@@ -27,15 +27,15 @@ const Home = () =>{
         })
     }
 
-    const filterAnswered = (questions, question) => {
+    const filterAnswered = (questions, question, authedUser) => {
         // console.log("Shyde: ", questions[question].optionOne.votes, questions[question].optionTwo.votes)
-        console.log("Socket " , questions[question].optionOne.votes !== [], questions[question].optionTwo.votes !== [] )
-        return questions[question].optionOne.votes.length !== 0 || questions[question].optionTwo.length !== 0 
+        // console.log("Socket " , questions[question].optionOne.votes !== [], questions[question].optionTwo.votes !== [] )
+        return questions[question].optionOne.votes.includes(authedUser) || questions[question].optionTwo.votes.includes(authedUser) 
     }
 
-    const filterUnanswered = (questions, question) => {
+    const filterUnanswered = (questions, question, authedUser) => {
         // console.log("look: ", Object.entries(question))
-        return questions[question].optionOne.votes.length === 0 && questions[question].optionTwo.votes.length === 0
+        return questions[question].optionOne.votes.includes(authedUser)  === false && questions[question].optionTwo.votes.includes(authedUser)  === false
     }
     return(
         <div>
@@ -78,7 +78,6 @@ const Home = () =>{
         
     )
 }
-
 
 
 export default connect()(Home)

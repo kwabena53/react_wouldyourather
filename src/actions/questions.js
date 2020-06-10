@@ -38,15 +38,13 @@ export function handleAddQuestionAnswer(authedUser, qid, answer ){
 
   return (dispatch) => {
  
-    console.log("gyae saas: ",  authedUser)
     return saveQuestionAnswer({
       authedUser: authedUser,
       qid: qid,
       answer: answer
     })
     .then((questionAnswer)=> {
-      console.log("Chale work o: ", questionAnswer)
-      dispatch(addQuestionAnswer(questionAnswer))
+      dispatch(addQuestionAnswer(authedUser, qid, answer))
     })
   }
 }
@@ -61,7 +59,7 @@ export function addQuestion (question) {
 
 export function addQuestionAnswer (authedUser, qid, answer ) {
   return {
-    type: ADD_QUESTION,
+    type: ADD_QUESTION_ANSWER,
     qid: qid,
     authedUser: authedUser,
     answer: answer

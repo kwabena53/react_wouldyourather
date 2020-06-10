@@ -18,8 +18,8 @@ const Radio = ({text, name, handleClick}) => {
     return(
         <Form.Check 
             type='radio'
-            id="default-radio"
-            name={name}
+            id={name}
+            name="optionRadio"
             label={text}
             onClick = {handleClick}
         />
@@ -34,11 +34,11 @@ const QuestionPage = ({question, user, dispatch, history}) => {
     const handleOptionClick = (e) => {
         const target = e.target
         const name = target.name
+        const option = target.id
         setQuestionAnswer({
-             ...answer,
-             [name] : target.value
+             option
          })
-         console.log(answer)
+         
     }
 
     const handleVote = (e) => {
@@ -46,10 +46,10 @@ const QuestionPage = ({question, user, dispatch, history}) => {
         dispatch(handleAddQuestionAnswer(
             user, 
             question.id, 
-            answer
+            answer.option
         ))
-        history.push('/')
-        // console.log("This was submitted: ", questionData)
+        history.push(`/result/${question.id}`)
+        console.log("selected ",answer.option)
     }
 
     return(
@@ -69,6 +69,21 @@ const QuestionPage = ({question, user, dispatch, history}) => {
                             <Col sm={12} lg={9} md={6}>
                                 <h5>Would you rather</h5>
                                 <div key="default-radio" className="mb-3 right">
+                                {/* <Form.Check 
+                                    type='radio'
+                                    id="optionOne"
+                                    name="optionRadio"
+                                    label={optionOne.text}
+                                    onClick = {handleOptionClick}
+                                    // defaultChecked
+                                />
+                                <Form.Check 
+                                    type='radio'
+                                    id="optionTwo"
+                                    name="optionRadio"
+                                    label={optionTwo.text}
+                                    onClick = {handleOptionClick}
+                                /> */}
                                     <Radio name="optionOne" handleClick={handleOptionClick} text={optionOne.text}/>
                                     <Radio name="optionTwo" handleClick={handleOptionClick} text={optionTwo.text}/>
                                 </div>                                          

@@ -17,7 +17,7 @@ const Questions = ({ filteredQuestion, users, questions, type}) => {
 }
 
 
-function mapStateToProps({questions, users}, {search, type}) {
+function mapStateToProps({questions, users, authedUser}, {search, type}) {
     const sortedQuestionIds = Object.keys(questions)
     .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
    
@@ -25,7 +25,7 @@ function mapStateToProps({questions, users}, {search, type}) {
     return{
         filteredQuestion: sortedQuestionIds !== undefined 
         ? Object.values(sortedQuestionIds).filter((question) =>{ //filtering to get only the answered questions
-            return search(questions, question) //callback function to search for answered/ unanswered questions
+            return search(questions, question, authedUser) //callback function to search for answered/ unanswered questions
             // questions[question] give you the question object
           })
         : [],
