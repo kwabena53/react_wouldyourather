@@ -24,7 +24,7 @@ const Menu =({authedUser, user, dispatch, activeKey}) =>{
                 <Nav.Link as={Link} to="/">Home</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link as={Link} to="/newquestion">New Question</Nav.Link>
+                <Nav.Link as={Link} to="/add">New Question</Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link  as={Link} to="/leaderboard">Leaderboard</Nav.Link>
