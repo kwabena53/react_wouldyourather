@@ -43,10 +43,10 @@ const ResultPage = ({question, user}) => {
                             </Col>
                             <Col sm={12} lg={9} md={6}>
                                 <h3>Results: </h3>
-                                <h6>{`Would you rather ${optionOneText}`}?}</h6>
+                                <h6>{`Would you rather ${optionOneText}?`}</h6>
                                 <p>{`${optionOneVotes} of ${totalVotes}`}</p>  
 
-                                <h6>{`Would you rather ${optionTwoText}`}?}</h6>
+                                <h6>{`Would you rather ${optionTwoText} ?`}</h6>
                                 <p>{`${optionTwoVotes} of ${totalVotes}`}</p>  
                             </Col>
                         </Row>

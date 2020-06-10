@@ -27,7 +27,7 @@ const Menu =({authedUser, user, dispatch, activeKey}) =>{
                 <Nav.Link as={Link} to="/newquestion">New Question</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link >Leaderboard</Nav.Link>
+                <Nav.Link  as={Link} to="/leaderboard">Leaderboard</Nav.Link>
             </Nav.Item>
             
             {authedUser  &&(

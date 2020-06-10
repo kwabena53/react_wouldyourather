@@ -5,7 +5,7 @@
       if(question.length > 13){
           return (question.substr(0, 12)+ "...")
       } else {
-          return question
+          return question+"..."
       }
   }
 

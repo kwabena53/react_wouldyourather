@@ -34,13 +34,13 @@ class App extends Component{
             <Route path='/question/:id' component={QuestionPage}/>
             <Route path='/newquestion' component={NewQuestion}/> 
             <Route path='/result/:id' component={ResultPage}/> 
+            <Route path='/leaderboard' component={LeaderboardPage}/> 
             </div>
             :
               <LoginPage/>
           }
         
-         {/* <LeaderboardPage path='/leaderboard' component={LeaderboardPage}/>
-              <NewQuestion path='/newquestion' component={NewQuestion}/>  */}
+        
       </div>
       </Router>
     )}

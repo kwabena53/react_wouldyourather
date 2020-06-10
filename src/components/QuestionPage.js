@@ -26,7 +26,7 @@ const Radio = ({text, name, handleClick}) => {
     )
 }
 
-const QuestionPage = ({question, user, dispatch, history}) => {
+const QuestionPage = ({question, authedUser, user, dispatch, history}) => {
     const {optionOne, optionTwo} = question
     const {avatarURL, name} = user
     const [answer, setQuestionAnswer] = useState("")
@@ -44,7 +44,7 @@ const QuestionPage = ({question, user, dispatch, history}) => {
     const handleVote = (e) => {
         e.preventDefault()
         dispatch(handleAddQuestionAnswer(
-            user, 
+            authedUser, 
             question.id, 
             answer.option
         ))
@@ -69,21 +69,6 @@ const QuestionPage = ({question, user, dispatch, history}) => {
                             <Col sm={12} lg={9} md={6}>
                                 <h5>Would you rather</h5>
                                 <div key="default-radio" className="mb-3 right">
-                                {/* <Form.Check 
-                                    type='radio'
-                                    id="optionOne"
-                                    name="optionRadio"
-                                    label={optionOne.text}
-                                    onClick = {handleOptionClick}
-                                    // defaultChecked
-                                />
-                                <Form.Check 
-                                    type='radio'
-                                    id="optionTwo"
-                                    name="optionRadio"
-                                    label={optionTwo.text}
-                                    onClick = {handleOptionClick}
-                                /> */}
                                     <Radio name="optionOne" handleClick={handleOptionClick} text={optionOne.text}/>
                                     <Radio name="optionTwo" handleClick={handleOptionClick} text={optionTwo.text}/>
                                 </div>                                          
@@ -103,7 +88,7 @@ const QuestionPage = ({question, user, dispatch, history}) => {
   
 }
 
-function mapStateToProps ({questions, users},  props ) {
+function mapStateToProps ({questions, users, authedUser},  props ) {
     const { id } = props.match.params
     
   const question = questions[id]
@@ -113,6 +98,7 @@ function mapStateToProps ({questions, users},  props ) {
     return {
       question,
       user,
+      authedUser
     }
   }
   
