@@ -57,3 +57,7 @@
  .wyr_inputField{
     margin-bottom: 1em;
  }
+
+ .optionSelected{
+  background-color: #B8FFE0;
+ }

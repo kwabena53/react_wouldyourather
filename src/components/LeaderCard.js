@@ -10,7 +10,6 @@ import Badge from 'react-bootstrap/Badge'
 
 
 const LeaderCard = ({data, position}) => {
-    console.log("data: ",data)
     return (
         <Card border="secondary" className="myCard"  style={{ width: '27rem' , height: '13em'}}>
         <Card.Header className="heading" >{data.name} : Position {position}</Card.Header>

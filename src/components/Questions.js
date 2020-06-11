@@ -9,8 +9,6 @@ const Questions = ({ filteredQuestion, users, questions, type}) => {
             
             filteredQuestion.map((question)=> {
                 let quest = questions[question]
-                console.log('question to transform: ', quest.optionOne.text)
-                console.log('formated: ', formatQuestionData(users, quest, type))
                  return <QuestionCard key={quest.id} data = {formatQuestionData(users, quest, type)}/>
             })
         )

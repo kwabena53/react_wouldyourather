@@ -49,7 +49,6 @@ const Menu =({authedUser, user, dispatch, activeKey}) =>{
 
 const mapStateToProps = ({authedUser, users}) =>{
     const user = users[authedUser]
-    console.log("spy",user)
     return {
         authedUser : authedUser ? authedUser: false,
         user

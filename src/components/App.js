@@ -10,6 +10,7 @@ import LeaderboardPage from "./LeaderboardPage"
 import NewQuestion from "./NewQuestion"
 import LoginPage from "./LoginPage"
 import ResultPage from "./ResultPage"
+import ErrorPage from "./ErrorPage"
 
 
 
@@ -21,7 +22,6 @@ class App extends Component{
   render(){
     
     const {authedUser} = this.props
-    console.log("This is the authedUser: ",authedUser)
     return (
       <Router>
         <div className="App">
@@ -35,6 +35,8 @@ class App extends Component{
             <Route path='/add' component={NewQuestion}/> 
             <Route path='/result/:id' component={ResultPage}/> 
             <Route path='/leaderboard' component={LeaderboardPage}/> 
+            <Route path='/error' component={ErrorPage}/> 
+            <Route path='/login' component={LoginPage}/> 
             </div>
             :
               <LoginPage/>

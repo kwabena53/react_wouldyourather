@@ -24,7 +24,6 @@ const NewQuestion = ({dispatch, authedUser, history}) => {
             authedUser
         ))
         history.push('/')
-        console.log("This was submitted: ", questionData)
     }
 
    const handleOptOneChange = (e) => {

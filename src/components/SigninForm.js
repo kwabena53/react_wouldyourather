@@ -19,8 +19,6 @@ const SigninForm = ({dispatch}) => {
 
         dispatch(setAuthedUser(userData))
 
-        console.log("I was selected", userData)
-
     }
 
     return(

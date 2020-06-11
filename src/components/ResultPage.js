@@ -13,10 +13,8 @@ import {withRouter} from "react-router-dom"
 
 
 
-const ResultPage = ({question, user}) => {
+const ResultPage = ({question, user, option}) => {
     const {optionOne, optionTwo} = question
-    console.log("optionone: ", optionOne)
-    console.log("optionTwo: ", optionTwo)
     const optionOneVotes = optionOne.votes.length
     const optionTwoVotes = optionTwo.votes.length
     const totalVotes = optionTwoVotes + optionOneVotes
@@ -25,8 +23,14 @@ const ResultPage = ({question, user}) => {
     const optionTwoText = optionTwo.text
 
     const {avatarURL, name} = user
+    let optionOneSelected = ""
+    let optionTwoSelected = ""
     
-    
+    if(option === "optionOne"){
+        optionOneSelected = "optionSelected"
+    }else{
+        optionTwoSelected = "optionSelected"
+    }
     return(
         <>
         <Menu activeKey="/"/> <br/>
@@ -43,12 +47,15 @@ const ResultPage = ({question, user}) => {
                             </Col>
                             <Col sm={12} lg={9} md={6}>
                                 <h3>Results: </h3>
-                                <h6>{`Would you rather ${optionOneText}?` }</h6>
-                                <p>{`${optionOneVotes} of ${totalVotes} representing ${(Math.round((optionOneVotes/totalVotes) * 100))}%`}</p>  
-
-                                <h6>{`Would you rather ${optionTwoText} ?`}</h6>
-                                <p>{`${optionTwoVotes} of ${totalVotes} representing ${(Math.round((optionTwoVotes/totalVotes) * 100))}%`}</p>
-                            </Col>
+                                <div className={optionOneSelected}>
+                                    <h6>{`Would you rather ${optionOneText}?` }</h6>
+                                    <p>{`${optionOneVotes} of ${totalVotes} representing ${(Math.round((optionOneVotes/totalVotes) * 100))}%`}</p>  
+                                </div>
+                                <div className={optionTwoSelected}>
+                                    <h6>{`Would you rather ${optionTwoText} ?`}</h6>
+                                    <p>{`${optionTwoVotes} of ${totalVotes} representing ${(Math.round((optionTwoVotes/totalVotes) * 100))}%`}</p>
+                                </div>
+                             </Col>
                         </Row>
                         </Card.Body>
                     </Card>
@@ -61,15 +68,18 @@ const ResultPage = ({question, user}) => {
   
 }
 
-function mapStateToProps ({questions, users},  props ) {
+function mapStateToProps ({questions, users, authedUser},  props ) {
     const { id } = props.match.params
     
   const question = questions[id]
   const user = users[question.author]
+  const authedUserDetails = users[authedUser]
+  const option = authedUserDetails.answers[id]
   
     return {
       question,
-      user
+      user,
+      option
     }
   }
   

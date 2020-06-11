@@ -10,6 +10,7 @@ import Container from 'react-bootstrap/Container'
 import {connect} from "react-redux"
 import {withRouter} from "react-router-dom"
 import {handleAddQuestionAnswer} from "../actions/questions"
+import { Redirect } from 'react-router-dom'
 
 
 
@@ -27,13 +28,15 @@ const Radio = ({text, name, handleClick}) => {
 }
 
 const QuestionPage = ({question, authedUser, user, dispatch, history}) => {
+    const [answer, setQuestionAnswer] = useState("")
+    if(question === undefined){
+        return <Redirect to='/error'/>
+     }
     const {optionOne, optionTwo} = question
     const {avatarURL, name} = user
-    const [answer, setQuestionAnswer] = useState("")
 
     const handleOptionClick = (e) => {
         const target = e.target
-        const name = target.name
         const option = target.id
         setQuestionAnswer({
              option
@@ -49,7 +52,6 @@ const QuestionPage = ({question, authedUser, user, dispatch, history}) => {
             answer.option
         ))
         history.push(`/result/${question.id}`)
-        console.log("selected ",answer.option)
     }
 
     return(
@@ -92,8 +94,11 @@ function mapStateToProps ({questions, users, authedUser},  props ) {
     const { id } = props.match.params
     
   const question = questions[id]
+  if(question === undefined){
+    return <Redirect to='/error'/>
+ }
+
   const user = users[question.author]
-  console.log(user.avatarURL)
   
     return {
       question,

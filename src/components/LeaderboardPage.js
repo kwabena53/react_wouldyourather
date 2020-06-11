@@ -11,7 +11,7 @@ import LeaderCard from "./LeaderCard"
 
 
 
-const LeaderboardPage = ({users, data}) => {
+const LeaderboardPage = ({users, sortedDataIds, data}) => {
 
     return(
         <>
@@ -19,8 +19,9 @@ const LeaderboardPage = ({users, data}) => {
         <Container>
             <Row>
                 <Col xl="12" sm="12" md="12" className="d-flex justify-content-center">
-                    {Object.values(data).map((data, i) =>{
-                        return <LeaderCard key={data.id} data = {data} position = {i+1}/>
+                    {Object.values(sortedDataIds).map((sortedDataIds, i) =>{
+                        const myData= data[sortedDataIds]
+                        return <LeaderCard key={myData.id} data = {myData} position = {i+1}/>
                     })}
                     
                 </Col>
@@ -34,10 +35,8 @@ const LeaderboardPage = ({users, data}) => {
 
 function mapStateToProps ({users}){
     let userData = {}
-    console.log("users: ",users)
    
       userData = Object.values(users).map((user)=>{
-          console.log("ans: ", user)
           const answerCount = Object.values(user.answers).length
           const questionCount = user.questions.length
           const total = questionCount + answerCount
@@ -55,9 +54,9 @@ function mapStateToProps ({users}){
 
     return {
       users,
-      data: userData
-    //   data:  Object.keys(userData)
-    //   .sort((a,b) => userData[b].total - userData[a].total)
+      data: userData,
+      sortedDataIds:  Object.keys(userData)
+      .sort((a,b) => userData[b].total - userData[a].total)
     }
   }
   
